@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lakshya Kalita | Team ERRORS Lead & Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030712;
+      --card-bg: rgba(15, 23, 42, 0.6);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover-border: rgba(56, 189, 248, 0.45);
+      --accent: #38bdf8;
+      --accent-red: #ef4444;
+      --accent-glow: rgba(56, 189, 248, 0.25);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 40px 20px 80px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient Floating Background Orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.55;
+    }
+
+    .orb-1 {
+      top: -10%;
+      left: 10%;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.3), transparent 70%);
+      animation: floatSlow 12s ease-in-out infinite alternate;
+    }
+
+    .orb-2 {
+      top: 45%;
+      right: 5%;
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(239, 68, 68, 0.2), transparent 70%);
+      animation: floatSlow 16s ease-in-out infinite alternate-reverse;
+    }
+
+    .orb-3 {
+      bottom: -10%;
+      left: 25%;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.22), transparent 70%);
+      animation: floatSlow 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatSlow {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(40px) scale(1.08); }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    /* Glassmorphism Card Style */
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
+    }
+
+    /* Scroll Reveal Animation Classes */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hero Section */
+    .hero-card {
+      padding: 44px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 320px;
+      height: 100%;
+      background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.08), transparent 70%);
+      pointer-events: none;
+    }
+
+    .team-badge-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #fca5a5;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-red);
+      box-shadow: 0 0 10px var(--accent-red);
+      animation: pulseGlow 1.8s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .name {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .typewriter-container {
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      min-height: 1.6rem;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.15rem;
+      background-color: var(--accent);
+      animation: blink 0.9s infinite;
+    }
+
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    .bio {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      max-width: 720px;
+      margin-bottom: 24px;
+    }
+
+    /* Contacts Bar */
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .contact-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .contact-badge:hover {
+      border-color: var(--accent);
+      color: #ffffff;
+      background: rgba(56, 189, 248, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.15);
+    }
+
+    /* Section Headers */
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--card-border), transparent);
+    }
+
+    /* Team ERRORS Banner */
+    .leadership-card {
+      padding: 26px 30px;
+      border-left: 3px solid var(--accent-red);
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.65), rgba(15, 23, 42, 0.7));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lead-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .team-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+
+    .motto {
+      font-size: 0.85rem;
+      color: var(--accent-red);
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .lead-body {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Projects Grid */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .project-card {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .project-card:hover {
+      border-color: var(--card-hover-border);
+      box-shadow: 0 16px 35px -10px var(--accent-glow);
+    }
+
+    .project-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+
+    .project-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .sih-pill {
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .project-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      padding: 3px 9px;
+      background: rgba(255, 255, 255, 0.04);
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .btn-view {
+      align-self: flex-start;
+      padding: 8px 18px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: transparent;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .btn-view:hover {
+      background: var(--accent);
+      color: #030712;
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* Education */
+    .edu-card {
+      padding: 26px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .edu-item {
+      position: relative;
+      padding-left: 18px;
+      border-left: 2px solid rgba(56, 189, 248, 0.3);
+      transition: border-color 0.25s ease;
+    }
+
+    .edu-item:hover {
+      border-left-color: var(--accent);
+    }
+
+    .edu-item::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .edu-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .edu-sub {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* Interests */
+    .interests-card {
+      padding: 26px 28px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .tab.active, .tab:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .interests-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .interest-pill {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .interest-pill:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .interest-pill.hidden {
+      display: none;
+    }
+
+    /* Interactive Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 7, 18, 0.78);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      max-width: 520px;
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+      animation: popIn 0.25s ease forwards;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .modal-sub {
+      font-size: 0.84rem;
+      color: var(--accent);
+      margin-bottom: 14px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .modal-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .modal-close-btn {
+      float: right;
+      background: var(--accent);
+      color: #030712;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-close-btn:hover {
+      opacity: 0.9;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+      .lead-top {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Background Ambient Light -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="container">
+
+    <!-- Hero Card -->
+    <header class="glass-card hero-card reveal">
+      <div class="team-badge-banner">
+        <span class="pulse-dot"></span>
+        <span>&lt;/&gt; TEAM LEAD • ERRORS (SIH)</span>
+      </div>
+      <h1 class="name">Lakshya Kalita</h1>
+      
+      <!-- Animated Typewriter Header -->
+      <div class="typewriter-container">
+        <span id="typewriterText"></span><span class="cursor"></span>
+      </div>
+
+      <p class="bio">
+        Leading <strong>Team ERRORS</strong> in the Smart India Hackathon. Driven by building purposeful software, 
+        human-accessible web platforms, and exploring generative AI concepts and student-led entrepreneurship.
+      </p>
+
+      <div class="contact-links">
+        <span class="contact-badge">📍 Majuli, Assam, India</span>
+        <button class="contact-badge" id="phoneCopyBtn" title="Click to copy">📞 7099930564[cite: 1]</button>
+        <a class="contact-badge" href="mailto:kalitalakshya817@gmail.com">✉️ kalitalakshya817@gmail.com</a>
+        <a class="contact-badge" href="https://www.linkedin.com/in/lakshya-kalita-102580331" target="_blank" rel="noopener noreferrer">🔗 LinkedIn</a>
+      </div>
+    </header>
+
+    <!-- Hackathon Leadership -->
+    <section class="reveal">
+      <div class="glass-card leadership-card">
+        <div class="lead-top">
+          <span class="team-title">&lt;ERRORS /&gt;</span>
+          <span class="motto">"From Bugs to Innovation"</span>
+        </div>
+        <p class="lead-body">
+          Team Lead for <strong>Team ERRORS</strong> in the Smart India Hackathon (SIH). Steering architecture, sprint management, 
+          and development across two flagship submissions: <strong>Jeevan Rekha</strong> (accessible elder healthcare) and 
+          <strong>EduSwap</strong> (peer-to-peer student skill and resource exchange).
+        </p>
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="reveal">
+      <div class="section-title">Smart India Hackathon Projects</div>
+      <div class="project-grid">
+
+        <!-- Jeevan Rekha -->
+        <div class="glass-card project-card tilt-card">
+          <div>
+            <div class="project-head">
+              <h3 class="project-name">Jeevan Rekha</h3>
+              <span class="sih-pill">SIH Submission</span>
+            </div>
+            <div class="project-subtitle">Elder-Friendly Healthcare Web Application</div>
+            <p class="project-desc">
+              A healthcare portal tailored for senior citizens featuring high-contrast readability, automated visual medication reminders, and a distraction-free navigation layout.
+            </p>
+            <div class="tag-cloud">
+              <span class="tag">Accessible UI</span>
+              <span class="tag">Healthcare</span>
+              <span class="tag">Web Architecture</span>
+              <span class="tag">Team ERRORS</span>
+            </div>
+          </div>
+          <button class="btn-view" onclick="openDetails('jeevan')">Explore Project</button>
+        </div>
+
+        <!-- EduSwap -->
+        <div class="glass-card project-card tilt-card">
+          <div>
+            <div class="project-head">
+              <h3 class="project-name">EduSwap</h3>
+              <span class="sih-pill">SIH Submission</span>
+            </div>
+            <div class="project-subtitle">Student Skill & Knowledge Exchange Platform</div>
+            <p class="project-desc">
+              A peer-to-peer campus ecosystem enabling college students to trade skills, share course notes, and collaborate through barter-based academic support.
+            </p>
+            <div class="tag-cloud">
+              <span class="tag">Peer-to-Peer</span>
+              <span class="tag">Knowledge Exchange</span>
+              <span class="tag">Community Platform</span>
+              <span class="tag">Team ERRORS</span>
+            </div>
+          </div>
+          <button class="btn-view" onclick="openDetails('eduswap')">Explore Project</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="reveal">
+      <div class="section-title">Education</div>
+      <div class="glass-card edu-card">
+        <div class="edu-item">
+          <div class="edu-title">Dhemaji Engineering College (DEC)[cite: 1]</div>
+          <div class="edu-sub">Bachelor of Technology - BTech, Computer Science and Engineering[cite: 1]</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-title">C S Rawanapar Model Higher Secondary School[cite: 1]</div>
+          <div class="edu-sub">Higher Secondary Education[cite: 1]</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interests -->
+    <section class="reveal">
+      <div class="section-title">Areas of Interest & Learning Focus</div>
+      <div class="glass-card interests-card">
+        
+        <div class="tabs">
+          <button class="tab active" data-filter="all">All Interests</button>
+          <button class="tab" data-filter="tech">Development</button>
+          <button class="tab" data-filter="ai">AI / ML</button>
+          <button class="tab" data-filter="lead">Leadership & Startups</button>
+        </div>
+
+        <div class="interests-cloud">
+          <div class="interest-pill" data-cat="ai">✨ Generative AI Explorations[cite: 1]</div>
+          <div class="interest-pill" data-cat="ai">🧠 Machine Learning Concepts[cite: 1]</div>
+          <div class="interest-pill" data-cat="tech">💻 Full-Stack Web Development[cite: 1]</div>
+          <div class="interest-pill" data-cat="tech">⚡ Responsive & Accessible UI/UX</div>
+          <div class="interest-pill" data-cat="tech">🛠️ Coding & Algorithmic Foundations[cite: 1]</div>
+          <div class="interest-pill" data-cat="lead">👥 Hackathon Team Leadership</div>
+          <div class="interest-pill" data-cat="lead">🚀 Tech Entrepreneurship & Innovation[cite: 1]</div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      <p>© <span id="year"></span> Lakshya Kalita • Built with modern HTML, CSS & JavaScript</p>
+    </footer>
+
+  </div>
+
+  <!-- Interactive Modal -->
+  <div class="modal-overlay" id="infoModal">
+    <div class="modal-content">
+      <h3 class="modal-title" id="mTitle">Project Name</h3>
+      <div class="modal-sub" id="mSub">Category</div>
+      <p class="modal-text" id="mBody">Description</p>
+      <button class="modal-close-btn" onclick="closeDetails()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. Typewriter Animation ---
+    const typewriterPhrases = [
+      "B-Tech, Computer Science & Engineering",
+      "Team Lead @ Team ERRORS (SIH)",
+      "Full-Stack Web Enthusiast",
+      "Exploring Generative AI & Innovation"
+    ];
+    let phraseIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    const typeTarget = document.getElementById("typewriterText");
+
+    function typeWriterLoop() {
+      const current = typewriterPhrases[phraseIdx];
+      if (isDeleting) {
+        typeTarget.textContent = current.substring(0, charIdx - 1);
+        charIdx--;
+      } else {
+        typeTarget.textContent = current.substring(0, charIdx + 1);
+        charIdx++;
+      }
+
+      let speed = isDeleting ? 40 : 80;
+
+      if (!isDeleting && charIdx === current.length) {
+        speed = 1800; // Pause at end of text
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        phraseIdx = (phraseIdx + 1) % typewriterPhrases.length;
+        speed = 400;
+      }
+      setTimeout(typeWriterLoop, speed);
+    }
+    typeWriterLoop();
+
+    // --- 2. Scroll Reveal Observer ---
+    const revealElems = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+    revealElems.forEach(el => revealObserver.observe(el));
+
+    // --- 3. 3D Card Interactive Tilt Effect ---
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    tiltCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -6;
+        const rotateY = ((x - centerX) / centerX) * 6;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+      });
+    });
+
+    // --- 4. Project Modal Details ---
+    const projectDB = {
+      jeevan: {
+        title: "Jeevan Rekha",
+        sub: "SIH Innovation • Team ERRORS",
+        desc: "Jeevan Rekha is designed to solve digital barriers for older adults managing medications. Built with clear contrast, large interactive touchpoints, and reminder queues, it makes digital healthcare accessible and stress-free."
+      },
+      eduswap: {
+        title: "EduSwap",
+        sub: "SIH Innovation • Team ERRORS",
+        desc: "EduSwap allows students to barter knowledge and study materials. The platform pairs students seeking assistance in one subject with peers who can help, creating a collaborative campus learning network."
+      }
+    };
+
+    const modal = document.getElementById('infoModal');
+    function openDetails(key) {
+      const data = projectDB[key];
+      if (data) {
+        document.getElementById('mTitle').textContent = data.title;
+        document.getElementById('mSub').textContent = data.sub;
+        document.getElementById('mBody').textContent = data.desc;
+        modal.style.display = 'flex';
+      }
+    }
+    function closeDetails() {
+      modal.style.display = 'none';
+    }
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) closeDetails();
+    });
+
+    // --- 5. Interest Filter ---
+    const tabs = document.querySelectorAll('.tab');
+    const pills = document.querySelectorAll('.interest-pill');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.getAttribute('data-filter');
+
+        pills.forEach(pill => {
+          if (filter === 'all' || pill.getAttribute('data-cat') === filter) {
+            pill.classList.remove('hidden');
+          } else {
+            pill.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // --- 6. Clipboard Copy Tooltip ---
+    const phoneBtn = document.getElementById('phoneCopyBtn');
+    phoneBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('7099930564').then(() => {
+        const prev = phoneBtn.textContent;
+        phoneBtn.textContent = 'Copied!';
+        setTimeout(() => phoneBtn.textContent = prev, 1500);
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
